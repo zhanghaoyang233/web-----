@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件委托</title>
+</head>
+
+<body>
+    <ul id="color-list">
+        <li>red</li>
+        <li>yellow</li>
+        <li>blue</li>
+        <li>green</li>
+        <li>black</li>
+        <li>white</li>
+        <li>pink</li>
+    </ul>
+
+    <script>
+        (function() {
+            var color_list = document.getElementById('color-list');
+            var colors = color_list.getElementsByTagName('li');
+            for (var i = 0; i < colors.length; i++) {
+                if (i % 2 == 0) {
+                    colors[i].addEventListener('click', showColor, false); //false表示在冒泡阶段处理函数，true表示在捕获阶段处理函数  
+                }
+                if (i % 2 !== 0) {
+                    colors[i].addEventListener('click', showColor1, false); //false表示在冒泡阶段处理函数，true表示在捕获阶段处理函数  
+                }
+            };
+
+            function showColor(e) {
+                var x = e.target;
+                x.style.color = "red";
+            };
+
+            function showColor1(e) {
+                var x = e.target;
+                x.style.color = "green";
+            };
+        })();
+    </script>
+</body>
+
+</html>
